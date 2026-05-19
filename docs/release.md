@@ -15,9 +15,11 @@ To cut a release:
 
 To re-release an existing tag, run the workflow manually and pass the tag (e.g. `v0.1.0`).
 
-Expected macOS artifact name (used by the tap updater):
+Expected macOS artifact names (used by the tap updater):
 
-- `wacli-macos-universal.tar.gz`
+- `wacli-darwin-amd64.tar.gz`
+- `wacli-darwin-arm64.tar.gz`
+- `wacli-darwin-universal.tar.gz` for backwards compatibility
 
 Other artifacts:
 
