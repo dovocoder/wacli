@@ -72,7 +72,7 @@ jobs:
           GH_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
         run: |
           if [ -z "$GH_TOKEN" ]; then
-            echo "::warning::Skipping Homebrew tap update because HOMEBREW_TAP_TOKEN is not configured with workflow access to steipete/homebrew-tap"
+            echo "::warning::Skipping Homebrew tap update because HOMEBREW_TAP_TOKEN is not configured with workflow access to dovocoder/homebrew-tap"
             exit 0
           fi
 
@@ -80,11 +80,11 @@ jobs:
           expected_title="Update wacli for ${RELEASE_TAG} (${request_id})"
 
           gh workflow run update-formula.yml \
-            --repo steipete/homebrew-tap \
+            --repo dovocoder/homebrew-tap \
             --ref main \
             -f formula=wacli \
             -f tag="$RELEASE_TAG" \
-            -f repository=openclaw/wacli \
+            -f repository=dovocoder/wacli \
             -f artifact_template=wacli-{target}.tar.gz \
             -f target_aliases=darwin_amd64=darwin-amd64,darwin_arm64=darwin-arm64,linux_amd64=linux-amd64,linux_arm64=linux-arm64 \
             -f request_id="$request_id"
@@ -92,7 +92,7 @@ jobs:
           run_id=""
           for _ in {1..30}; do
             run_id=$(gh run list \
-              --repo steipete/homebrew-tap \
+              --repo dovocoder/homebrew-tap \
               --workflow update-formula.yml \
               --branch main \
               --event workflow_dispatch \
@@ -111,7 +111,7 @@ jobs:
           fi
 
           gh run watch "$run_id" \
-            --repo steipete/homebrew-tap \
+            --repo dovocoder/homebrew-tap \
             --exit-status \
             --interval 10
 
